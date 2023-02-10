@@ -1,41 +1,38 @@
-import expres from "express";
-import http from "http";
-import { Server } from "socket.io";
-import path from "path";
-import { fileURLToPath } from "url";
+const express = require("express");
+const app = express();
+require("dotenv").config();
+const { connection } = require("./connection");
+const { userRoute } = require("./routes/UserRoute");
 
-const app = expres();
-const httpServer = http.createServer(app);
-const port = process.env.PORT || 8080;
-const io = new Server(httpServer, {
+const rooms = ["general", "tech", "finance", "crypto"];
+const cors = require("cors");
+
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+app.use(cors());
+app.use("/users", userRoute);
+
+app.get("/", (req, res) => {
+  res.send({ message: "welcome to home page" });
+});
+
+const server = require("http").createServer(app);
+const PORT = process.env.PORT || 8080;
+const io = require("socket.io")(server, {
   cors: {
-    origin: ["http://localhost:3000"],
+    origin: "http://localhost:3000",
+    methods: ["GET", "POST"],
   },
 });
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
-// base route of the server
-app.get("/", (req, res) => {
-  res.sendFile(__dirname + "/index.html");
-});
-
-// socket connection
-io.on("connection", (socket) => {
-  console.log(`a user connected with id ${socket.id}`);
-  socket.on("send-message", (data) => {
-    socket.broadcast.emit("message-from-server", data);
-    console.log("message received", data);
-  });
-  socket.on("disconnect", () => {
-    // socket.rooms.size === 0
-    console.log("socket disconnected");
-  });
-  // console.log("a user connected with reat app");
-});
-
-// server listening
-httpServer.listen(port, () => {
-  console.log("listening on port", port);
+server.listen(PORT, async () => {
+  try {
+    console.log("connecting with db");
+    await connection;
+    console.log("connected with db");
+  } catch (err) {
+    console.log("db connection error👇");
+    console.log(err.message);
+  }
+  console.log("listening on port", PORT);
 });
