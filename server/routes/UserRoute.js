@@ -4,7 +4,7 @@ const { UserModel } = require("../models/User");
 userRoute.post("/", async (req, res) => {
   try {
     const { name, email, password, picture } = req.body;
-    console.log(req.body);
+    //console.log(req.body);
 
     const user = await UserModel.create({ name, email, password, picture });
     res.status(201).json(user);
@@ -25,6 +25,7 @@ userRoute.post("/", async (req, res) => {
 userRoute.post("/login", async (req, res) => {
   try {
     const { email, password } = req.body;
+    console.log(req.body, "elll");
     const user = await UserModel.findByCredentials(email, password);
     user.status = "online";
     await user.save();

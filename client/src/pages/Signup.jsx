@@ -1,13 +1,16 @@
 import React, { useState } from "react";
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./Signup.css";
 import robot from "../assests/robot.jpg";
+import { useSignupUserMutation } from "../services/appApi";
 
 const Signup = () => {
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
+  const [signupUser, { isLoading, error }] = useSignupUserMutation();
+  const navigate = useNavigate();
   // image upload states
   const [image, setImage] = useState(null);
   const [uploadingImage, setUploadingImage] = useState(false);
@@ -29,6 +32,13 @@ const Signup = () => {
 
     const url = await uploadImage(image);
     //console.log("image url", url);
+    // signup User.
+    signupUser({ name, email, password, picture: url }).then((data) => {
+      if (data) {
+        navigate("/login");
+        console.log(data);
+      }
+    });
   };
 
   async function uploadImage() {
