@@ -16,6 +16,8 @@
   display: inline-block;
   border-radius: 10px;
   background-color: #d1e7dd;
+  /* border: 3px solid green; */
+  /* padding-bottom: 50px; */
 }
 
 .incoming-message .message-inner {
@@ -28,8 +30,10 @@
 }
 .message-timestamp-left {
   font-size: 0.85em;
+  font-size: 12px;
   font-weight: 300;
   margin-top: 10px;
+  margin-bottom: 0px;
 }
 .message-sender {
   margin-bottom: 5px;
@@ -37,22 +41,33 @@
 }
 .messages-date-indicator {
   width: 150px;
+  height: 30px;
+  margin-top: 25px;
   margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .conversation-info {
+  position: sticky;
+  z-index: 100;
+  top: 0;
   padding: 0;
-  margin: 0 auto;
-  height: 100px;
-  text-align: center;
+  background-color: orange;
+  margin: 0;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
 }
 
 .conversation-profile-picture {
-  width: 60px;
-  height: 60px;
+  width: 30px;
+  height: 30px;
   object-fit: cover;
-  margin: 10px auto;
-  margin-bottom: 30px;
+  /* margin: 10px auto; */
+
   border-radius: 50%;
   margin-left: 10px;
 }

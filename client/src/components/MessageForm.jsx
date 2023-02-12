@@ -32,7 +32,7 @@ const MessageForm = () => {
   const todayDate = getFormattedDate();
 
   socket.off("room-messages").on("room-messages", (roomMessages) => {
-    console.log("room-messages", roomMessages);
+    //console.log("room-messages", roomMessages);
     setMessages(roomMessages);
   });
 
@@ -51,25 +51,28 @@ const MessageForm = () => {
   function scrollToBottom() {
     messageEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }
-  console.log("messages: ", messages);
+  //console.log("messages: ", messages);
   return (
     <>
       <div className="messages-output">
         {user && !privateMemberMsg?._id && (
-          <div className="alert alert-info">
-            You are in the {currentRoom} room
+          <div className="conversation-info">
+            <p style={{ color: "#fff", marginLeft: 10, marginTop: 15 }}>
+              {" "}
+              You are in the {currentRoom} room
+            </p>
           </div>
         )}
         {user && privateMemberMsg?._id && (
           <>
-            <div className="alert alert-info conversation-info">
-              <div>
-                <span>Your conversation with {privateMemberMsg.name}</span>
-                <img
-                  src={privateMemberMsg.picture}
-                  className="conversation-profile-picture"
-                />
-              </div>
+            <div className="conversation-info">
+              <img
+                src={privateMemberMsg.picture}
+                className="conversation-profile-picture"
+              />
+              <p style={{ color: "#fff", marginTop: 15 }}>
+                {privateMemberMsg.name}
+              </p>
             </div>
           </>
         )}
@@ -91,7 +94,7 @@ const MessageForm = () => {
                   }
                 >
                   <div className="message-inner">
-                    <div className="d-flex align-items-center mb-3">
+                    <div className="d-flex align-items-center">
                       <img
                         src={sender?.picture}
                         style={{
@@ -115,6 +118,7 @@ const MessageForm = () => {
           ))}
         <div ref={messageEndRef}></div>
       </div>
+      {/* message input form  */}
       <Form onSubmit={handleSubmit}>
         <Row>
           <Col md={11}>

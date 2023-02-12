@@ -36,7 +36,7 @@ const Signup = () => {
     signupUser({ name, email, password, picture: url }).then((data) => {
       if (data.data) {
         navigate("/chat");
-        console.log(data);
+        //console.log(data);
       }
     });
   };
@@ -58,7 +58,7 @@ const Signup = () => {
       setUploadingImage(false);
       return urlData.url;
     } catch (err) {
-      console.log(err);
+      //  console.log(err);
       setUploadingImage(false);
     }
   }

@@ -25,3 +25,8 @@
   bottom: 0;
   left: 12px;
 }
+.sideBarCol {
+  /* background-color: blue; */
+  height: 88vh;
+  overflow-y: scroll;
+}
