@@ -16,7 +16,7 @@ const UserScheme = new mongoose.Schema(
     password: { type: String, required: [true, "Can't be empty"] },
     picture: { type: String },
     status: { type: String, default: "online" },
-    newMessages: { type: Object, default: {} },
+    newMessages: { type: Object, default: { key: "value" } },
   },
   { minimise: false }
 );

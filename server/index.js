@@ -51,11 +51,47 @@ io.on("connection", (socket) => {
   });
 
   // join room.
-  socket.on("join-room", async (room) => {
-    socket.join(room);
-    let roomMessages = await getLastMessagesFromRoom(room);
+  socket.on("join-room", async (newRoom, previousRoom) => {
+    socket.join(newRoom);
+    socket.leave(previousRoom);
+    let roomMessages = await getLastMessagesFromRoom(newRoom);
     roomMessages = sortRoomMessagesByDate(roomMessages);
     socket.emit("room-messages", roomMessages);
+  });
+
+  // message room.
+  socket.on("message-room", async (room, content, sender, time, date) => {
+    console.log("new-message sender: ", sender);
+    const newMessage = await MessageModel.create({
+      content,
+      from: sender,
+      time,
+      date,
+      to: room,
+      sender,
+    });
+    let roomMessages = await getLastMessagesFromRoom(room);
+    roomMessages = sortRoomMessagesByDate(roomMessages);
+    // sending message to room.
+    io.to(room).emit("room-messages", roomMessages);
+    socket.broadcast.emit("notifications", room);
+  });
+
+  app.delete("/logout", async (req, res) => {
+    try {
+      const { _id, newMessages } = req.body;
+      const user = await UserModel.findById(_id);
+      user.status = "offline";
+      user.newMessages = newMessages;
+      await user.save();
+
+      const members = await UserModel.find();
+      socket.broadcast.emit("new-user", members);
+      res.status(200).send();
+    } catch (e) {
+      console.log(e);
+      res.status(400).send();
+    }
   });
 });
 
@@ -64,13 +100,14 @@ server.listen(PORT, async () => {
     console.log("connecting with db");
     await connection;
     console.log("connected with db");
+    console.log("listening on port", PORT);
   } catch (err) {
     console.log("db connection error👇");
     console.log(err.message);
   }
-  console.log("listening on port", PORT);
 });
 
+// SORT MESSAGES BY DATE.
 function sortRoomMessagesByDate(messages) {
   return messages.sort(function (a, b) {
     let date1 = a._id.split("/");

@@ -7,6 +7,7 @@ const MessageSchema = new mongoose.Schema({
   time: String,
   date: String,
   to: String,
+  sender: Object,
 });
 
 const MessageModel = mongoose.model("Message", MessageSchema);

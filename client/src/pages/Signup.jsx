@@ -34,8 +34,8 @@ const Signup = () => {
     //console.log("image url", url);
     // signup User.
     signupUser({ name, email, password, picture: url }).then((data) => {
-      if (data) {
-        navigate("/login");
+      if (data.data) {
+        navigate("/chat");
         console.log(data);
       }
     });
@@ -90,6 +90,7 @@ const Signup = () => {
               />
             </div>
             <Form.Group className="mb-3" controlId="formBasicName">
+              {error && <p className="alert alert-danger">{error.data}</p>}
               <Form.Label>Name</Form.Label>
               <Form.Control
                 type="text"
@@ -125,7 +126,9 @@ const Signup = () => {
             </Form.Group>
 
             <Button variant="primary" type="submit">
-              {uploadingImage ? "Signing you up..." : "Signup"}
+              {uploadingImage || isLoading
+                ? "Creating your up..."
+                : "Create account"}
             </Button>
             <div className="py-4">
               <p className="text-center">

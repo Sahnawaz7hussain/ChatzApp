@@ -25,7 +25,7 @@ userRoute.post("/", async (req, res) => {
 userRoute.post("/login", async (req, res) => {
   try {
     const { email, password } = req.body;
-    console.log(req.body, "elll");
+    //console.log(req.body, "elll");
     const user = await UserModel.findByCredentials(email, password);
     user.status = "online";
     await user.save();

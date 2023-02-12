@@ -1,30 +1,32 @@
-import React, { useState } from "react";
-import { Col, Container, Row } from "react-bootstrap";
+import React, { useContext, useState } from "react";
+import { Col, Container, Row, Spinner } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import { Link, useNavigate } from "react-router-dom";
 import "./Login.css";
 import { useLoginUserMutation } from "../services/appApi";
+import { AppContext } from "../context/appContext";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loginUser, { isLoading, error }] = useLoginUserMutation();
   const navigate = useNavigate();
+  const { socket } = useContext(AppContext);
 
   const handleLogin = (e) => {
     e.preventDefault();
     // login logic
     loginUser({ email, password }).then((data) => {
-      if (data) {
+      if (data.data) {
         // socket work
+        socket.emit("new-user");
         // navigate to chat.
-        console.log("login data; ", data);
         navigate("/chat");
       }
     });
 
-    console.log(email, password);
+    // console.log(email, password);
   };
 
   return (
@@ -37,6 +39,7 @@ const Login = () => {
         >
           <Form style={{ width: "80%", maxWidth: 500 }} onSubmit={handleLogin}>
             <Form.Group className="mb-3" controlId="formBasicEmail">
+              {error && <p className="alert alert-danger">{error.data}</p>}
               <Form.Label>Email address</Form.Label>
               <Form.Control
                 type="email"
@@ -59,7 +62,7 @@ const Login = () => {
             </Form.Group>
 
             <Button variant="primary" type="submit">
-              Login
+              {isLoading ? <Spinner animation="grow" /> : "Login"}
             </Button>
             <div className="py-4">
               <p className="text-center">
