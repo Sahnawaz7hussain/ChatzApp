@@ -27,6 +27,7 @@
 }
 .sideBarCol {
   /* background-color: blue; */
-  height: 88vh;
+  min-height: fit-content;
+  max-height: 88vh;
   overflow-y: scroll;
 }

@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { AppContext } from "../context/appContext";
 import { addNotifications, resetNotifications } from "../features/userSlice";
 import "./Sidebar.css";
+const baseUrl = process.env.REACT_APP_BASE_URL;
 
 const Sidebars = () => {
   const user = useSelector((state) => state.user);
@@ -27,7 +28,7 @@ const Sidebars = () => {
   });
 
   function getRooms() {
-    fetch("http://localhost:8080/rooms")
+    fetch(`${baseUrl}/rooms`)
       .then((res) => res.json())
       .then((data) => setRooms(data));
   }
@@ -101,6 +102,7 @@ const Sidebars = () => {
         ))}
       </ListGroup>
       <h2>Members</h2>
+
       <ListGroup>
         {members.map((member, idx) => (
           <ListGroup.Item
@@ -110,8 +112,9 @@ const Sidebars = () => {
             onClick={() => handlePrivateMemberMsg(member)}
             disabled={member._id === user._id}
           >
-            {member.name}
+            {/* {member.name} */}
             <Row>
+              {/* status  */}
               <Col xs={2} className="member-status">
                 <img src={member.picture} className="member-status-img" />
                 {member.status === "online" ? (
@@ -125,6 +128,7 @@ const Sidebars = () => {
                 {member._id === user?._id && " (You) "}
                 {member.status == "offline" && " (Offline) "}
               </Col>
+              {/* notifications  */}
               <Col xs={1}>
                 <span className="badge rounded-pill bg-primary">
                   {user.newMessages[orderIds(member._id, user._id)]}

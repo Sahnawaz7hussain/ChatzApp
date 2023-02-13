@@ -18,7 +18,7 @@ function App() {
   const [privateMemberMsg, setPrivateMemberMsg] = useState({});
   const [newMessages, setNewMessages] = useState({});
 
-  console.log(process.env.REACT_APP_MY_ENV_VARIABLE, "dotenv");
+  // console.log(process.env.REACT_APP_MY_ENV_VARIABLE, "dotenv");
 
   return (
     <AppContext.Provider

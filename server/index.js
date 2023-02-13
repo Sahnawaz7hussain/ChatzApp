@@ -22,8 +22,8 @@ const server = require("http").createServer(app);
 const PORT = process.env.PORT || 8080;
 const io = require("socket.io")(server, {
   cors: {
-    origin: "http://localhost:3000",
-    methods: ["GET", "POST"],
+    //   //origin: "*",
+    //   methods: ["GET", "POST"],
   },
 });
 
@@ -97,7 +97,7 @@ io.on("connection", (socket) => {
 
 server.listen(PORT, async () => {
   try {
-    console.log("connecting with db");
+    console.log("connecting with db...");
     await connection;
     console.log("connected with db");
     console.log("listening on port", PORT);
@@ -115,6 +115,6 @@ function sortRoomMessagesByDate(messages) {
 
     date1 = date1[2] + date1[0] + date1[1];
     date2 = date2[2] + date2[0] + date2[1];
-    return date1 - date2 ? -1 : 1;
+    return date1 < date2 ? -1 : 1;
   });
 }
