@@ -1,4 +1,8 @@
-## ChatzApp
+# ChatzApp <img width="45px" src="https://user-images.githubusercontent.com/101489367/218701296-1c5e5eb6-b07c-46e4-8f15-9563de343c26.png" />
+<hr />
+
+ ### About 
+chatzApp is web application where users can chat each other and room chat, easy to use notifications system etc. In future I will add more features like  **typing** , **update profile** , **file / document sending** , **delete message**, **block someone** :+1: .
 
 #### homepage
 <img src="https://user-images.githubusercontent.com/101489367/218694826-d26f1184-6061-4df6-9575-5bb8a704f53f.png" />
