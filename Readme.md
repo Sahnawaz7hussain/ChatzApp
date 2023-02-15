@@ -14,6 +14,7 @@ chatzApp is web application where users can chat each other and room chat, easy 
  ### Backend
  - Nodejs
  - Expressjs
+ - Socket.io
  - Bcrypt
  ### Datebase
   - MongoDB 
