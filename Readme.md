@@ -2,7 +2,7 @@
 <hr />
 
  ### About 
-chatzApp is web application where users can chat each other and room chat, easy to use notifications system etc. In future I will add more features like  **typing** , **update profile** , **file / document sending** , **delete message**, **block someone** :+1: .
+chatzApp is web application where users can chat each other and room chat, easy to use notifications system etc. In future I will add more features like  `typing` , `update profile` , `file / document sending` , `delete message` , `block someone` :+1: .
 
 ## Tech stack .
   ### Frontend
