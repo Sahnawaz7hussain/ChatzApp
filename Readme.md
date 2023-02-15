@@ -5,7 +5,7 @@
 chatzApp is web application where users can chat each other and room chat, easy to use notifications system etc. In future I will add more features like  **typing** , **update profile** , **file / document sending** , **delete message**, **block someone** :+1: .
 
 ## Tech stack .
-  ### Frontend.
+  ### Frontend
 - ReactJS
 - React Bootstrap
 - Redux
@@ -16,8 +16,16 @@ chatzApp is web application where users can chat each other and room chat, easy 
  - Expressjs
  - Bcrypt
  ### Datebase
-  - MongoDB
-
+  - MongoDB 
+  
+ ## Features 
+  - User can create an account(duplicate email to create account prevented)
+  - Login with correct email & password.
+  - Room Chat (Rooms created by admin).
+  - Private Chat with any user.
+  - all chats stors in our mongodb atlas database.
+ 
+ ## Screenshots
 #### homepage
 <img src="https://user-images.githubusercontent.com/101489367/218694826-d26f1184-6061-4df6-9575-5bb8a704f53f.png" />
 
