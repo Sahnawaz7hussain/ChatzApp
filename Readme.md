@@ -1,4 +1,4 @@
-[# ChatzApp <img width="45px" src="https://user-images.githubusercontent.com/101489367/218701296-1c5e5eb6-b07c-46e4-8f15-9563de343c26.png" />](https://chatzapp.vercel.app)
+# ChatzApp <img width="45px" src="https://user-images.githubusercontent.com/101489367/218701296-1c5e5eb6-b07c-46e4-8f15-9563de343c26.png" />
 <hr />
 
  ### About 
