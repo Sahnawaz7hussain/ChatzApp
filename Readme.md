@@ -11,6 +11,7 @@ chatzApp is web application where users can chat each other and room chat, easy 
 - Redux
 - Redux/toolkit
 - Redux thunk
+- LocalStorage (for authentication)
  ### Backend
  - Nodejs
  - Expressjs
