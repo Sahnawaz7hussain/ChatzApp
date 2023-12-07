@@ -4,7 +4,7 @@ require("dotenv").config();
 const { connection } = require("./connection");
 const { userRoute } = require("./routes/UserRoute");
 
-const rooms = ["general", "tech", "finance", "crypto"];
+const rooms = ["general", "tech", "finance", "crypto","The Boyes"];
 const cors = require("cors");
 const { MessageModel } = require("./models/Message");
 const { UserModel } = require("./models/User");
